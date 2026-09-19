@@ -1,0 +1,31 @@
+// ===== Web Systems & Technology Team Project - Shared Script =====
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Highlight the current page's nav link
+  var currentPage = window.location.pathname.split("/").pop() || "index.html";
+  var navLinks = document.querySelectorAll("nav a");
+  navLinks.forEach(function (link) {
+    var linkPage = link.getAttribute("href");
+    if (linkPage === currentPage) {
+      link.style.backgroundColor = "var(--color-accent)";
+      link.style.color = "var(--color-primary)";
+    }
+  });
+
+  // Contact form: simple client-side handling (no real backend)
+  var contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var status = document.getElementById("form-status");
+      var name = document.getElementById("full-name").value.trim();
+      if (status) {
+        status.textContent = name
+          ? "Thanks, " + name + "! Your message has been received."
+          : "Thanks! Your message has been received.";
+        status.style.color = "green";
+      }
+      contactForm.reset();
+    });
+  }
+});
